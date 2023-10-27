@@ -19,9 +19,9 @@ const tiers = [
   },
   {
     name: "Pro",
-    id: "si_OnlcsLNQYbMVzV",
+    id: "pro",
     href: "#",
-    priceMonthly: "$5.99",
+    priceMonthly: "$5.00",
     description: "Unlock all the features of Sova Chat!",
     features: [
       "Unlimited Messages in Chats",
