@@ -3,9 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ClerkProvider } from "@clerk/nextjs";
 import { dark, light } from "@clerk/themes";
-const inter = Inter({ subsets: ["latin"] });
+import ClientProviders from "@/components/ClientProviders";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,24 +17,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-      <ClerkProvider
-        appearance={{
-          baseTheme: light,
-        }}
-      >
-        <html lang="en">
-          <body className={inter.className}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Header />
-              {children}
-            </ThemeProvider>
-          </body>
-        </html>
-      </ClerkProvider>
+    <ClientProviders>
+      <html lang="en">
+        <body className="flex flex-col min-h-screen">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClientProviders>
   );
 }

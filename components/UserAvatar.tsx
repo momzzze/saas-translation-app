@@ -8,25 +8,31 @@ const UserAvatar = ({
   image,
   className,
 }: {
-  name: string;
-  image: string;
+  name?: string | null;
+  image?: string | null;
   className?: string;
 }) => {
   return (
     <Avatar className={cn("bg-white text-black", className)}>
-      {/* {image && (
+      {image && (
         <Image
           src={image}
-          alt={name}
+          alt={name || "user avatar"}
           width={40}
           height={40}
-        //   referrerPolicy="no-referrer"
+          //   referrerPolicy="no-referrer"
           className="rounded-full"
         />
-      )} */}
+      )}
       {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-      <AvatarFallback delayMs={1000} className="dark:bg-white text-black text-lg">
-        {name?.split(' ').map((n) => n[0]).join('')}
+      <AvatarFallback
+        delayMs={1000}
+        className="dark:bg-white text-black text-lg"
+      >
+        {name
+          ?.split(" ")
+          .map((n) => n[0])
+          .join("")}
       </AvatarFallback>
     </Avatar>
   );

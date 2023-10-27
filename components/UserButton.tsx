@@ -12,28 +12,23 @@ import {
 import UserAvatar from "./UserAvatar";
 import {Session} from 'next-auth';
 import { Button } from "./ui/button";
+import {signIn,signOut} from 'next-auth/react';
 
 export const UserButton = ({session}:{session: Session | null}) => {
-    const router = useRouter();
-
     if(!session) return (
-        <Button variant={'outline'} onClick={()=>router.push('/sign-in')}>
-            Sign In
-        </Button>
-    )
+        <Button variant={'outline'} onClick={()=>signIn()}>Sign In</Button>
+    ) 
 
-  return (
+  return session && (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <UserAvatar name="Nikola Ninov" image='https://github.com/shadcn.png'/>
+        <UserAvatar name={session.user?.name} image={session?.user?.image}/>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
+        <DropdownMenuLabel>{session.user?.name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />    
         <DropdownMenuItem>Subscription</DropdownMenuItem>
+        <DropdownMenuItem onClick={()=>signOut()}>Sign Out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

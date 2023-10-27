@@ -1,7 +1,7 @@
-import { authMiddleware } from '@clerk/nextjs';
+// import { authMiddleware } from '@clerk/nextjs';
+import {withAuth} from 'next-auth/middleware';
 
-
-export default authMiddleware({});
+export default withAuth;
 
 export const config={
     matcher: ['/chat','/chat:id*','/register']
